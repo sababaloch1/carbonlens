@@ -1,0 +1,9 @@
+# S2 database for Homework 3 (separate port so it does not clash with Saba's MySQL on 3306)
+services:
+  db_s2:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: homework_s2
+    ports:
+      - "3307:3306"
