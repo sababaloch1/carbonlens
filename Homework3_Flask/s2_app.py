@@ -104,6 +104,12 @@ def one_factor(factor_id):
         return jsonify({"error": "factor not found"}), 404
     return jsonify(row.to_dict())
 
+@app.get("/s2/calculate")
+def calculate_help():
+       return jsonify({"message": "Send a POST request with JSON: "
+                       "{\"activity_type\": \"electricity\", \"amount\": 450, \"unit\": \"kWh\"}"})
+
+
 
 @app.post("/s2/calculate")
 def calculate():
