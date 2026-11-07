@@ -15,6 +15,12 @@
 <img width="1673" height="945" alt="Screenshot 2026-11-07 at 7 21 13 PM" src="https://github.com/user-attachments/assets/0dfc0126-a7f4-49c9-833c-b2c5c7fd1f76" />
 
 ## System Design (S2 UML Diagram)
+
+<img width="2880" height="1970" alt="Ha2_S2_UML" src="https://github.com/user-attachments/assets/1d094857-6877-47d0-a9f1-4e3d123dc155" />
+
+
+
+## System Design (S2 UML Diagram)
 <img width="2460" height="1898" alt="HA1_S2_UML_" src="https://github.com/user-attachments/assets/7fc370ea-f2af-456a-b9f6-7dacc6af9e0c" />
 
 
