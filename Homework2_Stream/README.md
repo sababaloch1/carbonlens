@@ -20,10 +20,6 @@
 
 
 
-## System Design (S2 UML Diagram)
-<img width="2460" height="1898" alt="HA1_S2_UML_" src="https://github.com/user-attachments/assets/7fc370ea-f2af-456a-b9f6-7dacc6af9e0c" />
-
-
 
 ## System Design (S3 UML Diagram)
 <img width="1030" height="626" alt="Screenshot 2026-11-07 at 9 27 42 PM" src="https://github.com/user-attachments/assets/fd42b4fb-25d7-443a-a66c-3472dbef2d59" />
