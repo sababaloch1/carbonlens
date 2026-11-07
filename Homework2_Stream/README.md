@@ -12,8 +12,7 @@
 
 ## System Design (S1 UML Diagram)
 
-*(Replace the link below with the specific diagram for this assignment)*
-![UML Diagram]<img width="1673" height="945" alt="Screenshot 2026-11-07 at 7 21 13 PM" src="https://github.com/user-attachments/assets/0dfc0126-a7f4-49c9-833c-b2c5c7fd1f76" />
+<img width="1673" height="945" alt="Screenshot 2026-11-07 at 7 21 13 PM" src="https://github.com/user-attachments/assets/0dfc0126-a7f4-49c9-833c-b2c5c7fd1f76" />
 
 
 ## Video Presentation
