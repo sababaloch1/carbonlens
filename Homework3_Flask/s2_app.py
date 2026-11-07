@@ -47,7 +47,7 @@ class EmissionFactorRow(db.Model):
                 "kg_co2e_per_unit": float(self.kg_co2e_per_unit), "source": self.source}
 
 
-# ---------------------------------------------------------- access layer
+# ---------------------------------------------------------- access l=ayer
 class FactorRepository:
     """All database access for factors lives here, routes never write SQL."""
 
