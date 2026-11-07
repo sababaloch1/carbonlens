@@ -9,7 +9,7 @@
 | Sameer Ghaffar | S3 Analytics & Reporting |
 | Mustafa Mulla Khil | S4 AI Coach |
 
-System Design (UML Diagram)
+## System Design (UML Diagram)
 *(Replace the link below with the specific diagram for this assignment)*
 ![UML Diagram](PASTE_YOUR_IMAGE_LINK_HERE)
 
