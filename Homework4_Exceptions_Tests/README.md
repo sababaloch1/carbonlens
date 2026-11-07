@@ -133,9 +133,9 @@ http://127.0.0.1:5000/s3/report?start_date=2026-01-01&end_date=2026-12-31
 
   
 
-## System Design (UML Diagram)
-*(Replace the link below with the specific diagram for this assignment)*
-![UML Diagram](PASTE_YOUR_IMAGE_LINK_HERE)
+## System Design
+(S1 UML Diagram)
+<img width="1621" height="957" alt="Screenshot 2026-11-07 at 7 22 55 PM" src="https://github.com/user-attachments/assets/c3f94dab-096c-4899-9b40-9282c9b799c4" />
 
 ## Video Presentation
 Watch our 5-minute team presentation here:
