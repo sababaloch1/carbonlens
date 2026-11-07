@@ -2,7 +2,7 @@
 
 This folder contains three Flask subsystems:
 
-- **S1 / Saba:** student data API in `app.py`
+- **S1 / Saba:** student data API in `s1_app.py`
 - **S2 / Tuba:** emission-factor and calculation API in `s2_app.py`
 - **S3:** analytics and reporting API in `s3_app.py`
 
@@ -38,7 +38,7 @@ python -m pytest -q
 Run one subsystem's tests:
 
 ```bash
-python -m pytest -q test_app.py       # Saba / S1
+python -m pytest -q test_s1_app.py       # Saba / S1
 python -m pytest -q test_s2_app.py    # Tuba / S2
 python -m pytest -q test_s3_app.py    # S3 analytics
 ```
@@ -50,7 +50,7 @@ Run only one application at a time. Each application uses port `5000`.
 ### Saba / S1
 
 ```bash
-python -m flask --app app run
+python -m flask --app s1_app run
 ```
 
 Endpoint:
