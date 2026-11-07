@@ -130,3 +130,16 @@ http://127.0.0.1:5000/s3/report?start_date=2026-01-01&end_date=2026-12-31
 - Data disappears when the Flask server stops.
 - Custom exceptions are defined in `exceptions.py`, `s2_exceptions.py`, and `s3_exceptions.py`.
 - Flask converts custom exceptions into JSON responses containing `error` and `message`.
+
+  
+
+## System Design (UML Diagram)
+*(Replace the link below with the specific diagram for this assignment)*
+![UML Diagram](PASTE_YOUR_IMAGE_LINK_HERE)
+
+## Video Presentation
+Watch our 5-minute team presentation here:
+ **[Click here to watch the Team Video](PASTE_YOUR_YOUTUBE_LINK_HERE)**
+
+
+
