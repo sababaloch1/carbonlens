@@ -1,0 +1,111 @@
+classDiagram
+    direction TB
+    class FootprintService {
+        -db: Session
+        +build(org_id, date_from, date_to) FootprintSummary
+        +latest_activity_date(org_id) date
+    }
+    class FootprintSummary {
+        +total_t_co2e: float
+        +by_scope: dict
+        +by_category: list
+        +by_department: list
+        +monthly: list
+        +targets: list
+        +data_quality: dict
+        +hotspots() list
+        +to_prompt_context() dict
+    }
+    class S3Analytics {
+        <<S3 module>>
+        +calculate_summary()
+        +calculate_breakdown()
+        +calculate_trend()
+        +calculate_top_sources()
+        +calculate_targets_status()
+    }
+    class S2Engine {
+        <<S2 module>>
+        +simulate_change(db, before, after) dict
+    }
+    class RuleEngine {
+        <<module rules.py>>
+        +RULES: list~Rule~
+        +generate_rule_recommendations(summary) list
+    }
+    class LLMClient {
+        <<interface>>
+        +complete_json(system, user, max_tokens) dict
+        +chat(messages, max_tokens) str
+    }
+    class OpenAIClient {
+        -_client: OpenAI
+        +complete_json()
+        +chat()
+    }
+    class RecommendationService {
+        <<module>>
+        +generate(db, user, llm, mode) GenerateResponse
+        +list_recommendations() list
+        +update_status(db, user, rec_id, status)
+    }
+    class InsightService {
+        <<module>>
+        +get_insights(db, user, llm) InsightsResponse
+        +rule_insights(summary) list
+    }
+    class WhatIfService {
+        <<module>>
+        +SCENARIOS: dict~Scenario~
+        +run(db, user, scenario_id, pct) WhatIfResult
+        +save_as_recommendation(db, user, result)
+    }
+    class ChatService {
+        <<module>>
+        +send_message(db, user, llm, session_id, text) ChatReply
+    }
+    class LearningService {
+        <<module>>
+        +generate(db, llm, topic, audience)
+        +approve(db, content_id)
+    }
+    class Recommendation {
+        <<table>>
+        +title, description
+        +est_saving_t_co2e
+        +cost_level, effort, scope
+        +status: RecStatus
+        +source: RecSource
+    }
+    class ChatSession {
+        <<table>>
+        +user_id, title
+    }
+    class ChatMessage {
+        <<table>>
+        +role, content
+        +tokens_in, tokens_out
+    }
+    class LearningContent {
+        <<table>>
+        +topic, audience, body
+        +status: ContentStatus
+    }
+    FootprintService ..> S3Analytics : reads
+    FootprintService ..> FootprintSummary : creates
+    RuleEngine ..> FootprintSummary
+    OpenAIClient ..|> LLMClient
+    InsightService ..> FootprintService
+    InsightService ..> LLMClient
+    RecommendationService ..> FootprintService
+    RecommendationService ..> RuleEngine
+    RecommendationService ..> LLMClient
+    RecommendationService ..> Recommendation : saves
+    WhatIfService ..> S2Engine : simulates
+    WhatIfService ..> Recommendation : saves
+    ChatService ..> FootprintService
+    ChatService ..> LLMClient
+    ChatService ..> ChatSession
+    ChatSession "1" *-- "*" ChatMessage
+    LearningService ..> LLMClient
+    LearningService ..> LearningContent
