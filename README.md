@@ -7,7 +7,11 @@ CarbonLens — Enterprise Carbon Footprint Tracker & AI Assistant (FH Dortmund C
 
 ## System Design (UML Diagrams)
 
-### S2 – Emission Engine (Tuba Jabeen)
+### S1 – (Saba Brahmani)
+![Uploading s1_class_diagram.svg…]()
+<img width="3040" height="2500" alt="s1_class_diagram" src="https://github.com/user-attachments/assets/16dcaa2a-2eee-4e72-ac93-88626b30f673" />
+![Uploading s1_class_diagram.svg…]()
+
 
 ### S2 – Emission Engine (Tuba Jabeen)
 ![S2 UML diagram](docs/S2_UML.png)
