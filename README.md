@@ -5,7 +5,7 @@ CarbonLens — Enterprise Carbon Footprint Tracker & AI Assistant (FH Dortmund C
 - [S1 Data & Identity (how it works, API, how to run)](docs/S1_Data_and_Identity.md)
 - [S2 Emission Engine (how it works, API, how to run)](docs/S2_Emission_Engine.md)
 - [S4 AI Sustainability Coach (how it works, API, requirements, how to run)](docs/S4_AI_Coach.md)
-- 
+  
 
 ## System Design (UML Diagrams)
 
