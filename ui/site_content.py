@@ -50,9 +50,8 @@ WHAT_WE_OFFER = [
     },
     {
         "title": "AI Sustainability Coach",
-        "description": "Prescriptive, data-backed decarbonization recommendations tailored to your industry profile (coming soon).",
+        "description": "Prescriptive, data-backed decarbonization recommendations, grounded chat, what-if analysis, and learning content tailored to your organization.",
         "icon": "🤖",
-        "status": "coming soon",
     },
 ]
 

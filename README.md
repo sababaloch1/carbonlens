@@ -49,7 +49,7 @@ Link: **ADD_SCREENCAST_LINK_HERE**
 ## Documentation
 - [S1 Data & Identity (how it works, API, how to run)](docs/S1_Data_and_Identity.md)
 - [S2 Emission Engine (how it works, API, requirements, how to run)](docs/S2_Emission_Engine.md)
-- S3 Analytics & Reporting: *(Sameer to add)*
+- [S3 Analytics & Reporting (how it works, API, tests, UML)](docs/S3_Analytics_Reporting.md)
 - [S4 AI Sustainability Coach (how it works, API, requirements, how to run)](docs/S4_AI_Coach.md)
 
 ## System Design (UML Diagrams)
@@ -61,7 +61,7 @@ Link: **ADD_SCREENCAST_LINK_HERE**
 ![S2 UML diagram](docs/S2_UML.png)
 
 ### S3 – Analytics & Reporting (Sameer Ghaffar)
-*(Sameer to add)*
+![S3 UML CODE](docs/S3_UML.mmd)
 
 ### S4 – AI Sustainability Coach (Mustafa Mulla Khil)
 ![S4 UML diagram](docs/S4_UML.png)

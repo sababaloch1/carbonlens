@@ -1,0 +1,186 @@
+classDiagram
+    direction TB
+
+    class S3AnalyticsRouter {
+        <<FastAPI router>>
+        +GET /analytics/summary
+        +GET /analytics/trend
+        +GET /analytics/breakdown
+        +GET /analytics/top-sources
+        +GET /analytics/score
+        +GET /analytics/targets/status
+        +GET /analytics/report.csv
+        +GET /analytics/report.pdf
+        +GET /analytics/live
+        +GET /analytics/anomalies
+    }
+
+    class BaseQuery {
+        <<base.py>>
+        +base_results_query(db, org_id, start, end)
+        +tenant isolation
+        +current result filter
+        +location based filter
+    }
+
+    class AnalyticsCache {
+        <<cache.py>>
+        +get(key)
+        +set(key, value, ttl)
+        +clear()
+        +TTL: 300 seconds
+    }
+
+    class SummaryService {
+        <<summary.py>>
+        +calculate_summary(db, org_id, start, end)
+    }
+
+    class TrendService {
+        <<trend.py>>
+        +calculate_trend(db, org_id, anchor_date)
+        +12 month aggregation
+        +YoY comparison
+    }
+
+    class BreakdownService {
+        <<breakdown.py>>
+        +calculate_breakdown(db, org_id, by, start, end)
+        +scope/category/department/facility
+    }
+
+    class SourcesService {
+        <<sources.py>>
+        +calculate_top_sources(db, org_id, limit)
+        +get_activity_records(db, org_id)
+    }
+
+    class ScoreService {
+        <<score.py>>
+        +calculate_sustainability_score(db, org_id)
+        +YoY trend score
+        +target progress score
+        +data quality score
+        +carbon intensity score
+    }
+
+    class TargetService {
+        <<targets.py>>
+        +create_target()
+        +calculate_targets_status()
+        +evaluate_target_status()
+    }
+
+    class ReportService {
+        <<reports.py>>
+        +generate_csv_report()
+        +generate_pdf_report()
+    }
+
+    class LiveService {
+        <<live.py>>
+        +calculate_live_emissions(db, org_id, target_date)
+        +facility grouping
+    }
+
+    class AnomalyService {
+        <<anomaly.py>>
+        +calculate_anomalies(db, org_id)
+        +flag_months(monthly_totals)
+    }
+
+    class EmissionResult {
+        <<S2 table>>
+        +activity_id
+        +reading_id
+        +kg_co2e
+        +cost_eur
+        +scope
+        +method
+        +is_current
+    }
+
+    class ActivityRecord {
+        <<S1/S2 table>>
+        +org_id
+        +category
+        +period_start
+        +department_id
+        +facility_id
+    }
+
+    class MeterReading {
+        <<S1/S2 table>>
+        +org_id
+        +asset_id
+        +recorded_at
+        +value
+        +unit
+    }
+
+    class Organization {
+        <<tenant>>
+        +id
+        +name
+    }
+
+    class StreamlitUI {
+        <<ui/pages_private>>
+        +dashboard.py
+        +targets.py
+        +score.py
+        +reports.py
+        +live_monitor.py
+    }
+
+    class S4Coach {
+        <<S4 module>>
+        +reads S3 calculations
+        +uses same totals
+    }
+
+    S3AnalyticsRouter --> SummaryService
+    S3AnalyticsRouter --> TrendService
+    S3AnalyticsRouter --> BreakdownService
+    S3AnalyticsRouter --> SourcesService
+    S3AnalyticsRouter --> ScoreService
+    S3AnalyticsRouter --> TargetService
+    S3AnalyticsRouter --> ReportService
+    S3AnalyticsRouter --> LiveService
+    S3AnalyticsRouter --> AnomalyService
+
+    SummaryService ..> BaseQuery
+    TrendService ..> BaseQuery
+    BreakdownService ..> BaseQuery
+    SourcesService ..> BaseQuery
+    ScoreService ..> TrendService
+    ScoreService ..> TargetService
+    ReportService ..> SummaryService
+    ReportService ..> BreakdownService
+    ReportService ..> SourcesService
+    ReportService ..> AnomalyService
+
+    SummaryService ..> AnalyticsCache
+    TrendService ..> AnalyticsCache
+    BreakdownService ..> AnalyticsCache
+    SourcesService ..> AnalyticsCache
+
+    BaseQuery ..> EmissionResult
+    BaseQuery ..> ActivityRecord
+    LiveService ..> EmissionResult
+    LiveService ..> MeterReading
+    LiveService ..> Organization
+    BreakdownService ..> ActivityRecord
+    SourcesService ..> ActivityRecord
+    TargetService ..> ActivityRecord
+    TargetService ..> EmissionResult
+    AnomalyService ..> ActivityRecord
+    AnomalyService ..> EmissionResult
+
+    StreamlitUI --> S3AnalyticsRouter : HTTP JSON/CSV/PDF
+    S4Coach ..> SummaryService : reuses calculations
+    S4Coach ..> TrendService : reuses calculations
+    S4Coach ..> BreakdownService : reuses calculations
+    S4Coach ..> SourcesService : reuses calculations
+    S4Coach ..> TargetService : reuses target status
+

@@ -53,10 +53,12 @@ def calculate_live_emissions(
     start_of_day = datetime.combine(target_date, time.min)
     end_of_day = datetime.combine(target_date, time.max)
 
+    facility_label = func.coalesce(Facility.name, "Unassigned").label("facility_name")
+
     # Base query joining EmissionResult -> MeterReading -> Asset -> Facility
     stmt = (
         select(
-            func.coalesce(Facility.name, "Unassigned").label("facility_name"),
+            facility_label,
             func.sum(EmissionResult.kg_co2e).label("total_kg"),
         )
         .select_from(EmissionResult)
@@ -74,7 +76,7 @@ def calculate_live_emissions(
                 EmissionResult.method.is_(None),
             ),
         )
-        .group_by(func.coalesce(Facility.name, "Unassigned"))
+        .group_by(facility_label)
         .order_by(func.sum(EmissionResult.kg_co2e).desc())
     )
 
