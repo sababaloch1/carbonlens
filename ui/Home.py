@@ -101,7 +101,7 @@ page_obj_reports   = st.Page("pages_private/reports.py",                title="R
 page_obj_live      = st.Page("pages_private/live_monitor.py",           title="Live Monitor",       icon="📡")
 page_obj_factors   = st.Page("pages/2_Factors_and_Tariffs.py",          title="Factors & Tariffs",  icon="⚡")
 page_obj_data_entry= st.Page("pages_private/placeholder_data_entry.py", title="Data Entry",         icon="📋")
-page_obj_coach     = st.Page("pages_private/placeholder_coach.py",      title="Coach (S4)",         icon="🤖")
+page_obj_coach     = st.Page("pages_private/coach.py",                  title="AI Coach",           icon="🤖")
 page_obj_about     = st.Page(page_about,  title="About CarbonLens",     icon="ℹ️")
 
 # ── Horizontal nav bar for logged-in users (replaces sidebar) ─────────────────

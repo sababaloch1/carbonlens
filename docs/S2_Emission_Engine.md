@@ -2,6 +2,8 @@
 
 Owner: Tuba Jabeen (Member 2). Works together with S1 (data and login), S3 (analytics) and S4 (AI coach).
 
+
+
 ## 1. What does S2 do?
 S2 turns **activities** (for example "12,000 kWh of electricity") into **CO2 emissions** (kg CO2e) and **cost** (EUR).
 
@@ -94,3 +96,6 @@ Tariffs: `activity_type,region,year,unit,eur_per_unit,source`
 - Natural gas and water have no tariff yet, so those records get emissions but no cost.
 - DESNZ factors are UK-based; they are a fallback, not German values.
 - The Streamlit page has its own login box until S3's shell shares its token.
+
+
+

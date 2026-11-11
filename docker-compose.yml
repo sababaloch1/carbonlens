@@ -29,6 +29,7 @@ services:
       JWT_SECRET: "${JWT_SECRET:?JWT_SECRET is missing. Get the .env file from Tuba}"
       
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
     depends_on:
       db:
         condition: service_healthy

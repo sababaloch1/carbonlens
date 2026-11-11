@@ -106,3 +106,24 @@ def api_delete(path: str, timeout: int = DEFAULT_TIMEOUT) -> Tuple[bool, Any]:
             return False, {"detail": res.text, "status_code": res.status_code}
     except requests.RequestException as exc:
         return False, {"detail": f"API not reachable: {exc}"}
+
+
+def api_patch(path: str, json_data: Optional[Dict[str, Any]] = None, timeout: int = DEFAULT_TIMEOUT) -> Tuple[bool, Any]:
+    """Execute PATCH request against API. Returns (success_bool, json_or_error_dict)."""
+    url = f"{API_URL}/{path.lstrip('/')}"
+    try:
+        res = requests.patch(url, headers=get_headers(), json=json_data, timeout=timeout)
+        if res.status_code == 401:
+            handle_401_response()
+            return False, {"detail": "Session expired"}
+        if 200 <= res.status_code < 300:
+            try:
+                return True, res.json()
+            except Exception:
+                return True, res.content
+        try:
+            return False, res.json()
+        except Exception:
+            return False, {"detail": res.text, "status_code": res.status_code}
+    except requests.RequestException as exc:
+        return False, {"detail": f"API not reachable: {exc}"}
