@@ -7,7 +7,6 @@ CarbonLens — Enterprise Carbon Footprint Tracker & AI Assistant (FH Dortmund C
 
 ## System Design (UML Diagrams)
 
-### S1 – (Saba Brahmani)
 ### S1 – Data & Identity (Saba Brahmani)
 ![S1 UML Diagram](https://github.com/user-attachments/assets/16dcaa2a-2eee-4e72-ac93-88626b30f673)
 
