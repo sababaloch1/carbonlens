@@ -66,6 +66,15 @@ def current_org_name() -> str:
         payload = decode_jwt_payload_unverified(token)
         if payload.get("org_name"):
             return str(payload["org_name"])
+        # The JWT carries no org name: ask the API once and cache it.
+        try:
+            from ui.api_client import api_get  # local import avoids a circular import
+            ok, me = api_get("analytics/me")
+            if ok and isinstance(me, dict) and me.get("org_name"):
+                st.session_state["org_name"] = str(me["org_name"])
+                return st.session_state["org_name"]
+        except Exception:
+            pass
         if payload.get("org_id"):
             return f"Org #{payload['org_id']}"
     return "Acme Logistics GmbH"

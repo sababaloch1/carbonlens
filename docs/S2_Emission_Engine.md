@@ -2,8 +2,6 @@
 
 Owner: Tuba Jabeen (Member 2). Works together with S1 (data and login), S3 (analytics) and S4 (AI coach).
 
-
-
 ## 1. What does S2 do?
 S2 turns **activities** (for example "12,000 kWh of electricity") into **CO2 emissions** (kg CO2e) and **cost** (EUR).
 
@@ -52,7 +50,7 @@ S2 also runs the project: Docker (one command starts everything) and GitHub Acti
 | `docker-compose.yml`, `api/Dockerfile`, `ui/Dockerfile` | The Docker stack. |
 | `.github/workflows/ci.yml` | Automatic tests on every push. |
 | `alembic/versions/b7c1d2e3f4a5_...` | Migration: adds the `miles` unit and the green-tariff table. |
-| `tests/test_engine/` | 75 tests (calculation core, service, import, API, green tariff). |
+| `tests/test_engine/` | 70 tests (calculation core, service, import, API, green tariff). |
 
 ## 6. API endpoints (all under `/engine`)
 | Method and path | Who | Purpose |
@@ -77,10 +75,10 @@ Tariffs: `activity_type,region,year,unit,eur_per_unit,source`
 - Tariffs: electricity BDEW Strompreisanalyse April 2026; diesel and petrol ADAC 21.10.2026. Natural gas and water tariffs are not included (no suitable source yet).
 
 ## 9. How to run
-1. Get the `.env` file from Tuba and put it in the project root, next to `docker-compose.yml`. Never commit it. It holds `JWT_SECRET`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` and `OPENAI_API_KEY`.
+1. Copy `.env.example` to `.env` in the project root (next to `docker-compose.yml`) and set `JWT_SECRET`. Never commit `.env`. The other values have working defaults; `OPENAI_API_KEY` is only needed for the AI coach.
 2. `docker compose up --build`. The API container runs the migrations and the seed by itself.
 3. API docs: http://localhost:8000/docs. UI: http://localhost:8501. Database port on your PC: 5433.
-4. Log in with the demo account that the seed prints in the API log.
+4. Log in with the demo account: `user2acc@carbonlens.local` / `user2account`. The seed also loads about 240 demo activities.
 5. Optional database viewer: `docker compose --profile tools up` then http://localhost:8080 (System: PostgreSQL, Server: `db`).
 6. Fresh start (deletes data; needed after changing the database password): `docker compose down -v`.
 7. Tests: `pytest` (Python 3.12 recommended). The app needs `JWT_SECRET` in the environment; CI sets a test value.
@@ -97,5 +95,31 @@ Tariffs: `activity_type,region,year,unit,eur_per_unit,source`
 - DESNZ factors are UK-based; they are a fallback, not German values.
 - The Streamlit page has its own login box until S3's shell shares its token.
 
+## 12. Requirements of S2
+### Functional
+| ID | Requirement |
+|---|---|
+| FR-2.01 | Store and list emission factors (filter by type, region, year). |
+| FR-2.02 | Import factors and tariffs from CSV; all rows are saved or none, with an error per row. |
+| FR-2.03 | Convert units inside the same unit family (MWh to kWh, tonne to kg, m3 to litre, miles to km). |
+| FR-2.04 | Give every result a scope (1, 2 or 3) and a GHG category. |
+| FR-2.05 | Calculate and save kg CO2e and cost (EUR) for an activity. |
+| FR-2.06 | Choose the factor by country and year, else nearest year, else GLOBAL. |
+| FR-2.07 | Calculate market-based Scope 2 from a facility's green-tariff factor next to the location-based result. |
+| FR-2.08 | Recalculate affected activities after a factor or tariff change and keep old results as history. |
+| FR-2.09 | Store a trace (factor, unit conversion, formula) with every result. |
+| FR-2.10 | Simulate what-if scenarios and compare before and after without saving anything. |
 
-
+### Non-functional
+| ID | Requirement |
+|---|---|
+| NFR-2.01 | Deterministic: the same input always gives the same result. |
+| NFR-2.02 | Exact arithmetic with `Decimal`, no `float`; rounding only for display. |
+| NFR-2.03 | The calculation core has no web or database imports, so it is testable alone. |
+| NFR-2.04 | Bulk recalculation loads factors and tariffs once per category. |
+| NFR-2.05 | Every factor and tariff names its source (and year). |
+| NFR-2.06 | The reference example (12,000 kWh x 0.363 = 4,356 kg CO2e) is covered by an automated test. |
+| NFR-2.07 | New activity types can be added with little change (see known limits). |
+| NFR-2.08 | Versioning: old factors, tariffs and results are kept; no hard deletes. |
+| NFR-2.09 | Reproducible deployment: one `docker compose up` starts everything and CI runs the tests on every push. |
+| NFR-2.10 | Calculation problems are stored as an error message on the record and never as 0. |

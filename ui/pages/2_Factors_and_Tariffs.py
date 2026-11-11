@@ -86,7 +86,7 @@ def show_error(data):
         st.error(detail.get("message", "Request failed"))
         errs = detail.get("errors") or []
         if errs:
-            st.dataframe(pd.DataFrame(errs), use_container_width=True)
+            st.dataframe(pd.DataFrame(errs))
     elif isinstance(detail, list):       # FastAPI validation errors
         st.error("; ".join(f"{'.'.join(map(str, e.get('loc', [])[1:]))}: {e.get('msg')}" for e in detail))
     else:
@@ -125,7 +125,7 @@ with tab_factors:
         else:
             cols = ["activity_type", "region", "year", "unit", "kg_co2e_per_unit", "scope",
                     "ghg_category", "version", "is_active", "source"]
-            st.dataframe(styled_table(df[cols], mode=current_mode()), use_container_width=True, hide_index=True)
+            st.dataframe(styled_table(df[cols], mode=current_mode()), hide_index=True)
             st.caption(f"{len(df)} factor(s). Changing a factor creates a new version; old ones are kept (NFR-2.08).")
     else:
         show_error(data)
@@ -169,7 +169,7 @@ with tab_tariffs:
             st.info("No tariffs yet.")
         else:
             t_cols = ["activity_type", "region", "year", "unit", "eur_per_unit", "source"]
-            st.dataframe(styled_table(df[t_cols], mode=current_mode()), use_container_width=True, hide_index=True)
+            st.dataframe(styled_table(df[t_cols], mode=current_mode()), hide_index=True)
     else:
         show_error(data)
 
@@ -211,7 +211,7 @@ with tab_green:
         if ok and rows:
             g_cols = ["year", "kg_co2e_per_kwh", "supplier", "source", "version"]
             st.dataframe(styled_table(pd.DataFrame(rows)[g_cols], mode=current_mode()),
-                         use_container_width=True, hide_index=True)
+                         hide_index=True)
         elif ok:
             st.info("This facility has no green tariff (only location-based results).")
         else:
@@ -238,7 +238,7 @@ with tab_sim:
     def sim_editor(title, key, default):
         st.markdown(f"**{title}**")
         return st.data_editor(
-            pd.DataFrame(default), key=key, num_rows="dynamic", use_container_width=True,
+            pd.DataFrame(default), key=key, num_rows="dynamic",
             column_config={
                 "category": st.column_config.SelectboxColumn("category", options=CATEGORIES, required=True),
                 "unit": st.column_config.SelectboxColumn("unit", options=UNITS, required=True),
@@ -265,7 +265,7 @@ with tab_sim:
         t = pd.DataFrame(out["items"])
         res_cols = ["label", "category", "amount", "unit", "kg_co2e", "cost_eur", "scope", "error"]
         st.dataframe(styled_table(t[res_cols], mode=current_mode()),
-                     use_container_width=True, hide_index=True)
+                     hide_index=True)
         if out["errors"]:
             st.warning(f"{out['errors']} item(s) could not be calculated (missing factor or unit mismatch). "
                        "They are NOT counted as zero.")
