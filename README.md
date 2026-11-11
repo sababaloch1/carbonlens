@@ -22,7 +22,6 @@ The project runs in three Docker containers (Database, API, UI).
 Data flows from **S1 (Data Entry)** ➔ **S2 (Calculation)** ➔ **S3 (Dashboard/Reports)** ➔ **S4 (AI Advice)**.
 
 ---
-*Add your existing "Documentation" and "System Design (UML)" sections below this.*
 ## Documentation
 - [S1 Data & Identity (how it works, API, how to run)](docs/S1_Data_and_Identity.md)
 - [S2 Emission Engine (how it works, API, how to run)](docs/S2_Emission_Engine.md)
