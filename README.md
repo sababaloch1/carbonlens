@@ -14,7 +14,6 @@ CarbonLens — Enterprise Carbon Footprint Tracker & AI Assistant (FH Dortmund C
 *   **Mustafa Mulla Khil:** S4 AI Coach
 
 ### System Design (UML Diagrams)
-*(You can replace the text below with the actual images once you upload them to the `docs/` folder)*
 *   **S1 UML:** ![S1 Diagram](docs/s1_uml.png)
 *   **S2 UML:** *(Add Tuba's link here)*
 *   **S3 UML:** *(Add Sameer's link here)*
