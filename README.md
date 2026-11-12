@@ -62,6 +62,8 @@ Link: **ADD_SCREENCAST_LINK_HERE**
 
 ### S3 – Analytics & Reporting (Sameer Ghaffar)
 ![S3 UML CODE](docs/S3_UML.mmd)
+![S3 UML CODE](docs/S3_UMLl.png)
+
 
 ### S4 – AI Sustainability Coach (Mustafa Mulla Khil)
 ![S4 UML diagram](docs/S4_UML.png)
