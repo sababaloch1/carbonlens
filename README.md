@@ -43,7 +43,7 @@ docker compose up --build
 | `user2acc@carbonlens.local` | `user2account` |
 
 ## 🎥 Screencast (7 minutes)
-Link: **ADD_SCREENCAST_LINK_HERE**
+Link: (https://drive.google.com/drive/folders/1A5gfNWLwUABo833Vm0TaAc_2JiNzuiTt?dmr=1&ec=wgc-drive-hero-goto)
 
 ---
 ## Documentation
